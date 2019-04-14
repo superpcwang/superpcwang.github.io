@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Superpcpwang Members</title>
+    <title>Superpcwang Members</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="common.js"></script>
     <script>
+        //NavConetnt
+        $(document).ready(function(){
+            $("#NavContent").load("nav.html"); 
+        });
+
+        //MainConetnt
         const MemberData = [
             {
                 name: "Superpcwang", 
                 info: "Superpcwang is an artist and engineer.", 
-                pic: "pic/members/superpcwangcard_main.png",
+                pic: "members/superpcwangcard_main.png",
             },
             {
                 name: "Bulbasaur", 
                 info: "It evolves into Ivysaur starting at level 16.",
-                pic: "pic/members/bulbasaur_main.png",
+                pic: "members/bulbasaur_main.png",
             },
             {
                 name: "Charmander", 
                 info: "It evolves into Charmeleon starting at level 16.", 
-                pic: "pic/members/charmander_main.png",
+                pic: "members/charmander_main.png",
             },
             {
                 name: "Squirtle", 
                 info: "It evolves into Wartortle starting at level 16.", 
-                pic: "pic/members/squirtle_main.png",
+                pic: "members/squirtle_main.png",
             },
             {
                 name: "Daniel's Dog",
                 info: "It is tired.",
-                pic: "pic/members/danielbog_main.png",
+                pic: "members/danielbog_main.png",
             },
         ];
         $(document).ready(function(){
-            var iMax = $(".col-md").length;
+            var iMax = $(".col").length;
             var iIdx = 0;
             for ( iIdx = 0; iIdx < MemberData.length; iIdx++ ){
                 var ListTitle = $(".card-title");
@@ -47,40 +52,32 @@
                 ListTitle[iIdx].innerHTML = MemberData[iIdx].name;
                 ListImg[iIdx].src = MemberData[iIdx].pic;
                 ListText[iIdx].innerHTML = MemberData[iIdx].info;
-            }
+            }/*
             for ( ; iIdx < iMax; iIdx++ ){
                 var ListCard= $(".card");
                 ListCard[iIdx].style.display = "none";
-            }
+            }*/
         });
     </script>
     <style>
-    .col-md{
+    .col{
         margin-top:30px;
     }
     .card{
-        width: 190px;
+        width: 180px;
     }
     </style>
 </head>
 <body>
     <div id="NavContent"></div>
-    <!--div class="card" style="width:200px">
-        <img class="card-img-top" src="pic/members/superpcwangcard_main.png" alt="Card image" style="width:100%">
-        <div class="card-body">
-            <h4 class="card-title">Superpcwang</h4>
-            <p class="card-text">Superpcwang is an architect and engineer</p>
-            <a href="#" class="btn btn-primary">See Profile</a>
-        </div>
-    </div-->
     <div class="container" id="MemberList">
         <div class="row">
 
         </div>
         <div class="row" >
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -88,9 +85,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -98,9 +95,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -108,9 +105,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -118,9 +115,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -128,9 +125,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -138,9 +135,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -148,9 +145,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -158,9 +155,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -168,9 +165,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -178,9 +175,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -188,9 +185,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -198,9 +195,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -208,9 +205,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -218,9 +215,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -228,9 +225,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -238,9 +235,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -248,9 +245,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -258,9 +255,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>
@@ -268,9 +265,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="pic/members/anonymous_main.png" alt="Card image" style="width:100%">
+                    <img class="card-img-top" src="members/anonymous_main.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-text"></p>

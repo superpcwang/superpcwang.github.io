@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Superpcpwang Home</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<script>
+    /*
+    console.info(document.doctype);
+    console.info(document.domain);
+    console.info(document.documentURI);
+    console.info(document.images);
+    console.info(document.implementation);
+    console.info(document.inputEncoding);
+    console.info(document.referrer);
+    console.info(document.title);
+    */
+    var URL = document.URL;
+    var FileName = URL.substring(URL.lastIndexOf('/') + 1);
+    //var NavItem = $(".nav-item");
+    var NavLink = $(".nav-link");
+    /*
+    for (var Idx = 0; Idx < NavLink.length; Idx++){
+        if ( NavLink[Idx].getAttribute("href") == FileName ){
+            NavLink[Idx].style.color = "Gold";
+        }
+    }*/
+</script>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand/logo -->
-    <a class="navbar-brand" href="index.html">HOME</a>
-    
-    <!-- Links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="members.html">Members</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.html?Page=Link2">Link 2</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.html?Page=Link3">Link 3</a>
-        </li>
-    </ul>
+    <a class="navbar-brand" href="home.html">HOME</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#CollaspseNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="CollaspseNav">
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="members.html" >Members</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link 3</a>
+            </li>
+        </ul>
+    </div>
 </nav>
