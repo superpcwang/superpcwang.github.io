@@ -13,9 +13,54 @@
             $("top").load("nav.html");
         });
     </script>
+    <style>
+    .carousel-inner img {
+        width: 100%;
+        height: 100%;
+    }
+  </style>
+    </style>
 </head>
 <body>
     <top></top>
-    
+    <div id="slides" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+            <li data-target="#slides" data-slide-to="1"></li>
+            <li data-target="#slides" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="home/unreal_game.jpg" alt="Unreal Engine">
+                <div class="carousel-caption">
+                    <h1>Unreal Engine</h1>
+                    <p>
+                        The Unreal Engine is a game engine developed by Epic Games, 
+                        first showcased in the 1998 first-person shooter game Unreal. 
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="home/unity_game.jpg" alt="Unity Engine">
+                <div class="carousel-caption">
+                    <h1>Unity Engine</h1>
+                    <p>
+                        Unity is a cross-platform real-time engine developed by Unity Technologies,
+                        first announced and released in June 2005 at Apple Inc.
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="home/cocos2d_game.jpg" alt="Cocos2d Engine">
+                <div class="carousel-caption">
+                        <h1>Cocos2d Engine</h1>
+                        <p>
+                            Cocos2d is an open source software framework. It can be used to build games, 
+                            apps and other cross platform GUI based interactive programs
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

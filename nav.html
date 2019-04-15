@@ -2,48 +2,69 @@
     .superpcwang-site-top{
         position: relative;
         background-color: #ffffff;
-        height: 50px;
-        padding-top: 20px;
-        line-height: 50px;
+        height: 80px;
+        padding: 0px;
         overflow: hidden;
-        z-index: 2;
     }
-
-    .superpcwang-site-logo {
+    .superpcwang-site-logo{
+        padding: 0px;
+        margin: 0px;
+        left: 15px;
+        bottom: 15px;
+        position: absolute;
+    }
+    .superpcwang-site-word {
         font-family:Papyrus, fantasy;
         color:#555555;
         font-size: 35px;
         letter-spacing: 1px;
-        top: 0px;
-        left: 10px;
-        display: block;
+        left: 65px;
+        top: 7px;
+        text-align: left;
         position: absolute;
+        white-space: nowrap;
+        padding: 0px;
+        margin: 0px;
     }
     .superpcwang-site-discript{
-        font-family: font;
-        font-size: 20px;
-        letter-spacing: 0px;
+        font-family:"Trebuchet MS", Helvetica, sans-serif;
+        font-size: 16px;
         color: DarkGoldenRod;
-        top: 5px;
-        left: 230px;
-        text-align: right;
+        left: 65px;
+        bottom: 12px;
+        text-align: left;
         position: absolute;
+        white-space: nowrap;
+        padding: 0px;
+        margin: 0px;
+    }
+    nav{
+        padding: 0px;
+    }
+    .navbar{
+        padding: 0px;
+    }
+    .navbar-brand{
+        padding: 3px;
+        margin: 0px;
+    }
+    .nav-link{
+        margin-left: 10px;
     }
 </style>
 <div class="container-fluid superpcwang-site-top">
-    <div class="superpcwang-site-logo">SHAWN WANG</div>
-    <div class="superpcwang-site-discript">
-            The Combination of Engineers and Artists
-    </div>
+    <div class="superpcwang-site-logo"> <img src="logo_main.png" style="width:50px;"> </div>
+    <div class="superpcwang-site-word">SHAWN WANG</div>
+    <div class="superpcwang-site-discript">The Combination of Engineer and Artist</div>
 </div>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
-    <!-- Brand/logo -->
-    <a class="navbar-brand" href="home.html">HOME</a>
+    <a class="navbar-brand" href="home.html">
+        <img src="navbar_home_icon.png" style="width:40px;">
+    </a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#CollaspseNav">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="CollaspseNav">
-        <!-- Links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="members.html" >Members</a>
