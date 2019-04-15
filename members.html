@@ -9,11 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        //NavConetnt
         $(document).ready(function(){
-            $("#NavContent").load("nav.html"); 
+            $("top").load("nav.html");
         });
-
+        
         //MainConetnt
         const MemberData = [
             {
@@ -52,11 +51,7 @@
                 ListTitle[iIdx].innerHTML = MemberData[iIdx].name;
                 ListImg[iIdx].src = MemberData[iIdx].pic;
                 ListText[iIdx].innerHTML = MemberData[iIdx].info;
-            }/*
-            for ( ; iIdx < iMax; iIdx++ ){
-                var ListCard= $(".card");
-                ListCard[iIdx].style.display = "none";
-            }*/
+            }
         });
     </script>
     <style>
@@ -69,7 +64,7 @@
     </style>
 </head>
 <body>
-    <div id="NavContent"></div>
+    <top></top>
     <div class="container" id="MemberList">
         <div class="row">
 
