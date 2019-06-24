@@ -1,0 +1,77 @@
+{
+	"name": "TestZone",
+	"description": "A test",
+	"id": 0,
+	"objects": [
+		{
+			"name": "layerBG",
+			"transform": {
+				"position": {
+					"x": 0,
+					"y": 0
+				}
+			},
+			"components": [
+				{
+					"name": "bg01",
+					"type": "sprite",
+					"materialName": "bg01",
+					"width": 854,
+					"height": 480
+				}
+			]
+		},
+		{
+			"name": "layerFish",
+			"children":[
+				{
+					"name": "fish02",
+					"transform":{
+						"scale": {
+							"x": 1,
+							"y": 1
+						},
+						"position": {
+							"x": 300,
+							"y": 300
+						}
+					},
+					"components": [
+						{
+							"name": "fish01Animator",
+							"type": "animator",
+							"animates": [
+								{
+									"name": "fish02Animation",
+									"type": "animatedSprite",
+									"materialName": "fish02",
+									"width": 78,
+									"height": 64,
+									"origin": {
+										"x": 0.5,
+										"y": 0.5
+									},
+									"assetWidth": 78,
+									"assetHeight": 512,
+									"frameWidth": 78,
+									"frameHeight": 64,
+									"frameCount": 8,
+									"frameSequence": [0, 1, 2, 3],
+									"frameRate": 200,
+									"playMode": "loop"
+								}
+							]
+						}
+					],
+					"behaviors": [
+						{
+							"name": "fish01Behavior",
+							"type": "fishBehavior",
+							"speed": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}
