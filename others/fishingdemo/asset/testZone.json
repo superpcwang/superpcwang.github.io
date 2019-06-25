@@ -38,19 +38,16 @@
 					},
 					"components": [
 						{
-							"name": "fish01Animator",
+							"name": "fish02Animator",
 							"type": "animator",
 							"animates": [
 								{
-									"name": "fish02Animation",
+									"name": "fish02Animation0",
 									"type": "animatedSprite",
 									"materialName": "fish02",
 									"width": 78,
 									"height": 64,
-									"origin": {
-										"x": 0.5,
-										"y": 0.5
-									},
+									"origin": {"x": 0.5, "y": 0.5},
 									"assetWidth": 78,
 									"assetHeight": 512,
 									"frameWidth": 78,
@@ -59,17 +56,343 @@
 									"frameSequence": [0, 1, 2, 3],
 									"frameRate": 200,
 									"playMode": "loop"
+								},
+								{
+									"name": "fish02Animation1",
+									"type": "animatedSprite",
+									"materialName": "fish02",
+									"width": 78,
+									"height": 64,
+									"origin": {"x": 0.5, "y": 0.5},
+									"assetWidth": 78,
+									"assetHeight": 512,
+									"frameWidth": 78,
+									"frameHeight": 64,
+									"frameCount": 8,
+									"frameSequence": [4, 5, 6, 7],
+									"frameRate": 200,
+									"playMode": "once"
 								}
 							]
+						},
+						{
+							"name": "fish02Collision",
+							"type": "collision",
+							"shape":
+							{
+								"type": "circle",
+								"radius": 20
+							}
 						}
 					],
 					"behaviors": [
 						{
-							"name": "fish01Behavior",
+							"name": "fish02Behavior",
 							"type": "fishBehavior",
+							"animator": "fish02Animator",
+							"life": 5,
 							"speed": 1
+
 						}
 					]
+				},
+				{
+					"name": "fish03",
+					"transform":{
+						"scale": {
+							"x": 1,
+							"y": 1
+						},
+						"position": {
+							"x": 200,
+							"y": 220
+						}
+					},
+					"components": [
+						{
+							"name": "fish03Animator",
+							"type": "animator",
+							"animates": [
+								{
+									"name": "fish03Animation0",
+									"type": "animatedSprite",
+									"materialName": "fish03",
+									"width": 72,
+									"height": 56,
+									"origin": {
+										"x": 0.5,
+										"y": 0.5
+									},
+									"assetWidth": 72,
+									"assetHeight": 448,
+									"frameWidth": 72,
+									"frameHeight": 56,
+									"frameCount": 8,
+									"frameSequence": [2, 3, 0, 1],
+									"frameRate": 200,
+									"playMode": "loop"
+								},
+								{
+									"name": "fish03Animation1",
+									"type": "animatedSprite",
+									"materialName": "fish03",
+									"width": 72,
+									"height": 56,
+									"origin": {
+										"x": 0.5,
+										"y": 0.5
+									},
+									"assetWidth": 72,
+									"assetHeight": 448,
+									"frameWidth": 72,
+									"frameHeight": 56,
+									"frameCount": 8,
+									"frameSequence": [4, 5, 6, 7],
+									"frameRate": 200,
+									"playMode": "once"
+								}
+							]
+						},
+						{
+							"name": "fish03Collision",
+							"type": "collision",
+							"shape":
+							{
+								"type": "circle",
+								"radius": 20
+							}
+						}
+					],
+					"behaviors": [
+						{
+							"name": "fish03Behavior",
+							"type": "fishBehavior",
+							"animator": "fish03Animator",
+							"life": 10,
+							"speed": 1.2
+						}
+					]
+				},
+				{
+					"name": "fish04",
+					"transform":{
+						"scale": {
+							"x": 1,
+							"y": 1
+						},
+						"position": {
+							"x": 100,
+							"y": 160
+						}
+					},
+					"components": [
+						{
+							"name": "fish04Animator",
+							"type": "animator",
+							"animates": [
+								{
+									"name": "fish04Animation0",
+									"type": "animatedSprite",
+									"materialName": "fish04",
+									"width": 77,
+									"height": 59,
+									"origin": {
+										"x": 0.5,
+										"y": 0.5
+									},
+									"assetWidth": 77,
+									"assetHeight": 472,
+									"frameWidth": 77,
+									"frameHeight": 59,
+									"frameCount": 8,
+									"frameSequence": [3, 0, 1, 2],
+									"frameRate": 200,
+									"playMode": "loop"
+								},
+								{
+									"name": "fish04Animation1",
+									"type": "animatedSprite",
+									"materialName": "fish04",
+									"width": 77,
+									"height": 59,
+									"origin": {
+										"x": 0.5,
+										"y": 0.5
+									},
+									"assetWidth": 77,
+									"assetHeight": 472,
+									"frameWidth": 77,
+									"frameHeight": 59,
+									"frameCount": 8,
+									"frameSequence": [4, 5, 6, 7],
+									"frameRate": 200,
+									"playMode": "once"
+								}
+							]
+						},
+						{
+							"name": "fish04Collision",
+							"type": "collision",
+							"shape":
+							{
+								"type": "circle",
+								"radius": 20
+							}
+						}
+					],
+					"behaviors": [
+						{
+							"name": "fish04Behavior",
+							"type": "fishBehavior",
+							"animator": "fish04Animator",
+							"life": 50,
+							"speed": 1.1
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "layerBullet",
+			"transform": {
+				"position": {
+					"x": 470,
+					"y": 446
+				}
+
+			},
+			"behaviors": [
+				{
+					"name": "bulletBehavior01",
+					"type": "bulletBehavior",
+					"bulletSprite":
+					{
+						"name": "bulletSprite",
+						"type": "sprite",
+						"materialName": "bullet",
+						"width": 22,
+						"height": 32,
+						"origin": {
+							"x": 0.5,
+							"y": 0.5
+						}
+					},
+					"bulletCollision":
+					{
+						"name": "bulletCollision01",
+						"type": "collision",
+						"shape":
+						{
+							"type": "circle",
+							"radius": 10
+						}
+					},
+					"bulletExplosion":
+					{
+						"name": "bulletExplosionAnimation",
+						"type": "animatedSprite",
+						"materialName": "net01",
+						"width": 100,
+						"height": 100,
+						"origin": {
+							"x": 0.5,
+							"y": 0.5
+						},
+						"assetWidth": 160,
+						"assetHeight": 1440,
+						"frameWidth": 160,
+						"frameHeight": 160,
+						"frameCount": 9,
+						"frameSequence": [0, 1, 2, 3, 4,5 ,6, 7, 8],
+						"frameRate": 50,
+						"playMode": "once"
+					}
+				}
+			]
+		},
+		{
+			"name": "cannonBar",
+			"transform": {
+				"position": {
+					"x": 427,
+					"y": 446
+				}
+			},
+			"components":[
+				{
+					"name": "cannonBar",
+					"type": "sprite",
+					"materialName": "cannonBar",
+					"width": 765,
+					"height": 72,
+					"origin": {"x": 0.5, "y": 0.5}
+				}
+			]
+		},
+		{
+			"name": "cannonMain",
+			"transform": {
+				"position": {
+					"x": 470,
+					"y": 446
+				}
+
+			},
+			"components": [
+				{
+					"name": "cannonAnimator",
+					"type": "animator",
+					"animates": [
+						{
+							"name": "cannonAnimation",
+							"type": "animatedSprite",
+							"materialName": "cannon",
+							"width": 74,
+							"height": 94,
+							"origin": {
+								"x": 0.5,
+								"y": 0.5
+							},
+							"assetWidth": 74,
+							"assetHeight": 470,
+							"frameWidth": 74,
+							"frameHeight": 94,
+							"frameCount": 5,
+							"frameSequence": [0, 1, 2, 3, 4],
+							"frameRate": 20,
+							"playMode": "once"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "darkarea0",
+			"transform": {
+				"position": {"x": 854, "y": 0}
+			},
+			"components": [
+				{
+					"name": "darkarea0",
+					"type": "sprite",
+					"materialName": "black",
+					"width": 1000,
+					"height": 1000
+				}
+			]
+		},
+		{
+			"name": "darkarea1",
+			"transform": {
+				"position": {"x": 0, "y": 480}
+			},
+			"components": [
+				{
+					"name": "darkarea1",
+					"type": "sprite",
+					"materialName": "black",
+					"width": 1000,
+					"height": 1000
 				}
 			]
 		}

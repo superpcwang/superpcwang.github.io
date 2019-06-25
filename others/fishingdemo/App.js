@@ -25,6 +25,13 @@ var App;
             //Load material
             Lib.MaterialManager.registerMaterial(new Lib.Material("bg01", "asset/BG_01.png", new Lib.Color(255, 225, 225, 255)));
             Lib.MaterialManager.registerMaterial(new Lib.Material("fish02", "asset/fish02.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("fish03", "asset/fish03.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("fish04", "asset/fish04.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("cannonBar", "asset/bottom-bar.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("bullet", "asset/bullet.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("net01", "asset/net01f.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("cannon", "asset/cannon.png", new Lib.Color(255, 225, 225, 255)));
+            Lib.MaterialManager.registerMaterial(new Lib.Material("black", "asset/black.png", new Lib.Color(255, 225, 225, 255)));
             //Load Sound
             //Lib.AudioManager.loadSoundFile("swoosh", "asset/SWOOSH.mp3", false);
             //Load Zone
@@ -56,7 +63,7 @@ var App;
         Game.prototype.onMessage = function (message) {
             if (message.code === "MOUSE_UP") {
                 var context = message.context;
-                document.title = "Pos: [" + context.position.x + ", " + context.position.y + "]";
+                document.title = "Fishing Game (BETA): [" + context.position.x + ", " + context.position.y + "]";
                 //Lib.AudioManager.playSound("swoosh");
             }
         };
@@ -208,7 +215,7 @@ var App;
                 var bulletRigidbody = new Lib.RigidbodyComponent();
                 var bulletCollision = new Lib.CollisionComponent(this.m_bulletCollisionData);
                 var bulletVelocity = Lib.Vector3.normalize(context.position.toVector3(), this.m_owner.transform.position);
-                bulletRigidbody.setVelocity(bulletVelocity.multiply(20));
+                bulletRigidbody.setVelocity(bulletVelocity.multiply(5));
                 bullet.addComponent(bulletRigidbody);
                 bullet.addComponent(bulletSprite);
                 bullet.addComponent(bulletCollision);
@@ -250,14 +257,22 @@ var App;
     var FishBehaviorData = /** @class */ (function () {
         function FishBehaviorData() {
             this.speed = 1;
+            this.life = 5;
         }
         FishBehaviorData.prototype.setFromJson = function (json) {
+            if (json.animator === undefined) {
+                throw new Error("Animator must be defined in fishBehavior.");
+            }
+            this.animator = json.animator;
             if (json.name === undefined) {
                 throw new Error("Name must be defined in fishBehavior.");
             }
             this.name = String(json.name);
             if (json.speed !== undefined) {
                 this.speed = Number(json.speed);
+            }
+            if (json.life !== undefined) {
+                this.life = Number(json.life);
             }
         };
         return FishBehaviorData;
@@ -281,6 +296,12 @@ var App;
         return FishBehaviorBuilder;
     }());
     App.FishBehaviorBuilder = FishBehaviorBuilder;
+    var fishState;
+    (function (fishState) {
+        fishState[fishState["init"] = 0] = "init";
+        fishState[fishState["run"] = 1] = "run";
+        fishState[fishState["stop"] = 2] = "stop";
+    })(fishState || (fishState = {}));
     var FishBehavior = /** @class */ (function (_super) {
         __extends(FishBehavior, _super);
         function FishBehavior(data) {
@@ -288,47 +309,63 @@ var App;
             _this.m_speed = 1;
             _this.m_life = 5;
             _this.m_speed = data.speed;
+            _this.m_fishAnimatorName = data.animator;
+            _this.m_life = data.life;
+            _this.m_fishState = fishState.run;
             Lib.Message.subscribe("COLLISION_ENTRY", _this);
             return _this;
         }
         FishBehavior.prototype.load = function () {
             _super.prototype.load.call(this);
+            this.m_fish = this.m_owner;
+            if (this.m_fish === undefined) {
+                throw new Error("Get fish owner error.");
+            }
+            this.m_fishAnimator = this.m_fish.getComponentByName(this.m_fishAnimatorName);
+            if (this.m_fishAnimator === undefined) {
+                throw new Error("Get fish: " + this.m_fish.name + " animator: " + this.m_fishAnimatorName + " error.");
+            }
         };
         FishBehavior.prototype.update = function (time) {
             _super.prototype.update.call(this, time);
-            this.m_owner.transform.position.x += this.m_speed;
-            var x = this.m_owner.transform.position.x;
-            if (x > 900) {
-                this.m_owner.transform.position.x = -100;
-            }
-            if (this.m_fishAnimator !== undefined) {
-                if (this.m_life < 0) {
-                    this.m_fishAnimator.setState(1);
-                    this.m_life = 1000;
-                }
-                if (this.m_life > 500 && this.m_fishAnimator.isDone()) {
-                    this.m_fishAnimator.getOwner().transform.position.x = -220;
-                    this.m_life = 5;
+            switch (this.m_fishState) {
+                case fishState.init: {
+                    this.m_owner.transform.position.x = -100;
+                    this.m_fishState = fishState.run;
                     this.m_fishAnimator.setState(0);
+                    break;
+                }
+                case fishState.run: {
+                    this.m_owner.transform.position.x += this.m_speed;
+                    if (this.m_owner.transform.position.x > 900) {
+                        this.m_fishState = fishState.init;
+                    }
+                    if (this.m_life < 0) {
+                        this.m_fishAnimator.setState(1);
+                        this.m_fishState = fishState.stop;
+                    }
+                    break;
+                }
+                case fishState.stop: {
+                    this.m_owner.transform.position.x += this.m_speed / 4;
+                    if (this.m_fishAnimator.isDone()) {
+                        this.m_fishState = fishState.init;
+                        this.m_life = 5;
+                    }
+                    break;
+                }
+                default: {
+                    throw new Error("Fish state error.");
                 }
             }
         };
         FishBehavior.prototype.onMessage = function (message) {
             if (message.code === "COLLISION_ENTRY") {
                 var context = message.context;
-                var fish = void 0;
-                if (context.a.name === "fish01Collision") {
-                    fish = context.a.getOwner();
-                }
-                else if (context.b.name === "fish01Collision") {
-                    fish = context.b.getOwner();
-                }
-                else {
-                    return;
-                }
-                this.m_fishAnimator = fish.getComponentByName("fish01Animator");
-                if (this.m_fishAnimator === undefined) {
-                    throw new Error("Get m_fishAnimator error.");
+                if (context.a.getOwner() != this.m_fish) {
+                    if (context.b.getOwner() != this.m_fish) {
+                        return;
+                    }
                 }
                 this.m_life--;
             }
@@ -1958,7 +1995,7 @@ var Lib;
             Lib.ZoneManager.initialize();
             Lib.CollisionManager.initialize();
             //Set clear color
-            Lib.gl.clearColor(0, 0, 0.3, 1);
+            Lib.gl.clearColor(0, 0, 0, 1);
             Lib.gl.enable(Lib.gl.BLEND);
             //PNG edge problem: https://stackoverflow.com/questions/39341564/webgl-how-to-correctly-blend-alpha-channel-png
             //gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -2662,7 +2699,7 @@ var Lib;
             var _this = _super.call(this, name, materialName, width, height, origin) || this;
             _this.m_frameSequence = [];
             //each frame time
-            _this.m_frameTime = 100;
+            _this.m_frameTime = -1;
             _this.m_frameUVs = [];
             _this.m_currentFrame = 0;
             _this.m_currentTime = 0;
@@ -2687,6 +2724,7 @@ var Lib;
         AnimatedSprite.prototype.load = function () {
             _super.prototype.load.call(this);
             this.calculateTotalUVs();
+            this.changeFrame(0);
         };
         AnimatedSprite.prototype.update = function (time) {
             //if (this.m_assetLoaded === false) {
@@ -2708,21 +2746,8 @@ var Lib;
                         throw new Error("Unsopport playMode: " + this.m_playMode);
                     }
                 }
-                //change texture
                 var idx = this.m_frameSequence[this.m_currentFrame];
-                this.m_vertices[0].texCoords.copyFrom(this.m_frameUVs[idx].min);
-                this.m_vertices[1].texCoords = new Lib.Vector2(this.m_frameUVs[idx].min.x, this.m_frameUVs[idx].max.y);
-                this.m_vertices[2].texCoords.copyFrom(this.m_frameUVs[idx].max);
-                this.m_vertices[3].texCoords.copyFrom(this.m_frameUVs[idx].max);
-                this.m_vertices[4].texCoords = new Lib.Vector2(this.m_frameUVs[idx].max.x, this.m_frameUVs[idx].min.y);
-                this.m_vertices[5].texCoords.copyFrom(this.m_frameUVs[idx].min);
-                this.m_buffer.clearData();
-                for (var _i = 0, _a = this.m_vertices; _i < _a.length; _i++) {
-                    var v = _a[_i];
-                    this.m_buffer.pushBackData(v.toArray());
-                }
-                this.m_buffer.upload();
-                this.m_buffer.unbind();
+                this.changeFrame(idx);
             }
             _super.prototype.update.call(this, time);
         };
@@ -2743,6 +2768,22 @@ var Lib;
                 var max = new Lib.Vector2(uMax, vMax);
                 this.m_frameUVs.push(new UVInfo(min, max));
             }
+        };
+        AnimatedSprite.prototype.changeFrame = function (idx) {
+            this.m_vertices[0].texCoords.copyFrom(this.m_frameUVs[idx].min);
+            this.m_vertices[1].texCoords = new Lib.Vector2(this.m_frameUVs[idx].min.x, this.m_frameUVs[idx].max.y);
+            this.m_vertices[2].texCoords.copyFrom(this.m_frameUVs[idx].max);
+            this.m_vertices[3].texCoords.copyFrom(this.m_frameUVs[idx].max);
+            this.m_vertices[4].texCoords = new Lib.Vector2(this.m_frameUVs[idx].max.x, this.m_frameUVs[idx].min.y);
+            this.m_vertices[5].texCoords.copyFrom(this.m_frameUVs[idx].min);
+            //upload to webgl
+            this.m_buffer.clearData();
+            for (var _i = 0, _a = this.m_vertices; _i < _a.length; _i++) {
+                var v = _a[_i];
+                this.m_buffer.pushBackData(v.toArray());
+            }
+            this.m_buffer.upload();
+            this.m_buffer.unbind();
         };
         AnimatedSprite.prototype.calculateUVs = function () {
             /*
