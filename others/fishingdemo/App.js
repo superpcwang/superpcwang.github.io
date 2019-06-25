@@ -257,7 +257,7 @@ var App;
     var FishBehaviorData = /** @class */ (function () {
         function FishBehaviorData() {
             this.speed = 1;
-            this.life = 5;
+            this.life = 1;
         }
         FishBehaviorData.prototype.setFromJson = function (json) {
             if (json.animator === undefined) {
@@ -307,10 +307,12 @@ var App;
         function FishBehavior(data) {
             var _this = _super.call(this, data) || this;
             _this.m_speed = 1;
-            _this.m_life = 5;
+            _this.m_life = 1;
+            _this.m_maxLife = 1;
             _this.m_speed = data.speed;
             _this.m_fishAnimatorName = data.animator;
-            _this.m_life = data.life;
+            _this.m_maxLife = data.life;
+            _this.m_life = _this.m_maxLife;
             _this.m_fishState = fishState.run;
             Lib.Message.subscribe("COLLISION_ENTRY", _this);
             return _this;
@@ -340,7 +342,7 @@ var App;
                     if (this.m_owner.transform.position.x > 900) {
                         this.m_fishState = fishState.init;
                     }
-                    if (this.m_life < 0) {
+                    if (this.m_life <= 0) {
                         this.m_fishAnimator.setState(1);
                         this.m_fishState = fishState.stop;
                     }
@@ -350,7 +352,7 @@ var App;
                     this.m_owner.transform.position.x += this.m_speed / 4;
                     if (this.m_fishAnimator.isDone()) {
                         this.m_fishState = fishState.init;
-                        this.m_life = 5;
+                        this.m_life = this.m_maxLife;
                     }
                     break;
                 }

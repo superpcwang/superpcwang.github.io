@@ -90,7 +90,7 @@
 							"name": "fish02Behavior",
 							"type": "fishBehavior",
 							"animator": "fish02Animator",
-							"life": 5,
+							"life": 1,
 							"speed": 1
 
 						}
@@ -168,7 +168,7 @@
 							"name": "fish03Behavior",
 							"type": "fishBehavior",
 							"animator": "fish03Animator",
-							"life": 10,
+							"life": 1,
 							"speed": 1.2
 						}
 					]
@@ -245,7 +245,7 @@
 							"name": "fish04Behavior",
 							"type": "fishBehavior",
 							"animator": "fish04Animator",
-							"life": 50,
+							"life": 1,
 							"speed": 1.1
 						}
 					]
